@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/styles.css" />
+    <script
+      src="https://kit.fontawesome.com/86e474c9b5.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./jquery-3.7.0.min.js"></script>
+    <title>Multiple Find and Replace Tool Online</title>
+  </head>
+  <body>
+    <h1>Find and Replace - Multiple Text Online</h1>
+    <div id="container">
+      <div id="input" class="text-box">
+        <h2>Input Text</h2>
+        <textarea
+          name="input-text"
+          id="input-text"
+          rows="8"
+          placeholder="Type or paste your content here"
+        ></textarea>
+      </div>
+      <div id="output" class="text-box">
+        <h2>Output Text</h2>
+        <textarea
+          name="output-text"
+          id="output-text"
+          rows="8"
+          placeholder="Results will be shown here"
+        ></textarea>
+      </div>
+      <div id="controls">
+        <h2>Find and Replace Options</h2>
+        <div id="rows-container">
+          <div class="row">
+            <p class="find-label">Find #1</p>
+            <input type="text" class="find" />
+            <p class="replace-label">Replace #1</p>
+            <input type="text" class="replace" />
+            <div class="mode">
+              <input type="radio" name="mode-1" value="basic" checked /> Basic
+              <input type="radio" name="mode-1" value="whole-word" /> Match
+              Whole Word
+              <input type="radio" name="mode-1" value="regex" /> Regex
+            </div>
+            <i
+              class="fa-regular fa-square-plus add-row"
+              title="Add new row"
+            ></i>
+            <i
+              class="fa-regular fa-square-minus delete-row"
+              title="Delete row"
+            ></i>
+          </div>
+        </div>
+        <button id="replace-all">Replace All</button>
+      </div>
+    </div>
+    <script src="./scripts.js"></script>
+  </body>
+</html>
