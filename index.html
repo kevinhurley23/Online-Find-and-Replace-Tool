@@ -36,28 +36,64 @@
       <div id="controls">
         <h2>Find and Replace Options</h2>
         <div id="rows-container">
-          <div class="row">
-            <p class="find-label">Find #1</p>
-            <input type="text" class="find" />
-            <p class="replace-label">Replace #1</p>
-            <input type="text" class="replace" />
-            <div class="mode">
-              <input type="radio" name="mode-1" value="basic" checked /> Basic
-              <input type="radio" name="mode-1" value="whole-word" /> Match
-              Whole Word
-              <input type="radio" name="mode-1" value="regex" /> Regex
+          <div class="row outer-row">
+            <div class="row">
+              <div class="row">
+                <p class="find-label">Find #1</p>
+                <input type="text" class="find" />
+              </div>
+              <div class="row">
+                <p class="replace-label">Replace #1</p>
+                <input type="text" class="replace" />
+              </div>
             </div>
-            <i
-              class="fa-regular fa-square-plus add-row"
-              title="Add new row"
-            ></i>
-            <i
-              class="fa-regular fa-square-minus delete-row"
-              title="Delete row"
-            ></i>
+            <div class="row">
+              <div class="mode row">
+                <label>
+                  <input type="radio" name="mode-1" value="basic" checked />
+                  Basic
+                </label>
+                <label>
+                  <input type="radio" name="mode-1" value="whole-word" />
+                  Match Whole Word
+                </label>
+                <label>
+                  <input type="radio" name="mode-1" value="regex" />
+                  Regex
+                </label>
+              </div>
+              <div class="add-delete">
+                <i
+                  class="fa-regular fa-square-plus add-row"
+                  title="Add new row"
+                ></i>
+                <i
+                  class="fa-regular fa-square-minus delete-row"
+                  title="Delete row"
+                ></i>
+              </div>
+            </div>
           </div>
         </div>
-        <button id="replace-all">Replace All</button>
+        <div class="row button-row">
+          <button id="replace-all">Replace All</button>
+          <button id="reset">Reset</button>
+          <button id="save">Save Pattern</button>
+          <button id="load">Load Pattern</button>
+        </div>
+      </div>
+    </div>
+    <div id="save-modal" class="modal" style="display: none">
+      <div class="modal-content">
+        <label for="pattern-name">Enter a name for the search pattern:</label>
+        <input type="text" id="pattern-name" />
+        <button id="save-button">Save</button>
+      </div>
+    </div>
+    <div id="load-modal" class="modal" style="display: none">
+      <div class="modal-content">
+        <h2>Load Search Pattern</h2>
+        <div id="pattern-list" class="row"></div>
       </div>
     </div>
     <script src="./scripts.js"></script>
