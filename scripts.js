@@ -67,7 +67,6 @@ $(document).ready(function () {
       let modeValue = $(this).find(".mode input:checked").val();
       return { find: findValue, replace: replaceValue, mode: modeValue };
     });
-    console.log(rows);
     let currentDate = new Date().toISOString();
     let patternData = {
       type: "searchPattern",
@@ -75,6 +74,7 @@ $(document).ready(function () {
       rows: rows.toArray(),
     };
     $("#save-modal").show();
+    $("#pattern-name").focus();
     $("#save-button").on("click", function () {
       let patternName = $("#pattern-name").val();
       if (patternName) {
@@ -87,30 +87,56 @@ $(document).ready(function () {
 
   function loadSearchPattern() {
     $("#pattern-list").empty();
-    let searchPatterns = Object.keys(localStorage).filter((key) => {
-      let item = JSON.parse(localStorage.getItem(key));
+    $("#load-modal p").hide();
+    const searchPatterns = Object.keys(localStorage).filter((key) => {
+      let item;
+      try {
+        item = JSON.parse(localStorage.getItem(key));
+      } catch (e) {
+        return false;
+      }
       return item.type === "searchPattern";
     });
     $("#load-modal").show();
-    searchPatterns.forEach((pattern) => {
-      let item = JSON.parse(localStorage.getItem(pattern));
-      let date = new Date(item.date).toLocaleString();
-      let button = $(`<button>${pattern} (${date})</button>`);
-      button.on("click", function () {
-        $("#rows-container").html("");
-        item.rows.forEach((row, index) => {
-          let newRow = $(initialRows);
-          newRow.find(".find").val(row.find);
-          newRow.find(".replace").val(row.replace);
-          newRow.find(`.mode input`).attr("name", `mode-${index + 1}`);
-          newRow.find(`.mode input[value="${row.mode}"]`).prop("checked", true);
-          $("#rows-container").append(newRow);
+    if (searchPatterns.length > 0) {
+      searchPatterns.forEach((pattern) => {
+        let item = JSON.parse(localStorage.getItem(pattern));
+        let date = new Date(item.date).toLocaleString();
+        let button = $(
+          `<button class="pattern-button" data=${pattern}>${pattern} (${date})</button>`
+        );
+        button.on("click", function () {
+          $("#rows-container").html("");
+          item.rows.forEach((row, index) => {
+            let newRow = $(initialRows);
+            newRow.find(".find").val(row.find);
+            newRow.find(".replace").val(row.replace);
+            newRow.find(`.mode input`).attr("name", `mode-${index + 1}`);
+            newRow
+              .find(`.mode input[value="${row.mode}"]`)
+              .prop("checked", true);
+            $("#rows-container").append(newRow);
+          });
+          updateLabels();
+          $("#load-modal").hide();
         });
-        updateLabels();
-        $("#load-modal").hide();
+        let row = $('<div class="row"></div>');
+        row.append(button);
+        row.append(
+          "<i class='fa-regular fa-square-minus delete-pattern' title='Delete Search Pattern'></i>"
+        );
+        $("#pattern-list").append(row);
       });
-      $("#pattern-list").append(button);
-    });
+    } else {
+      $("#load-modal p").show();
+    }
+  }
+
+  function deletePattern() {
+    let key = $(this).siblings("button").attr("data");
+    localStorage.removeItem(key);
+    let row = $(this).closest(".row");
+    row.remove();
   }
 
   $("#rows-container").on("click", ".add-row", addRow);
@@ -118,10 +144,16 @@ $(document).ready(function () {
   $("#replace-all").on("click", replaceText);
   $("#reset").on("click", reset);
   $("#save").on("click", saveSearchPattern);
+  $("#pattern-name").on("keypress", function (event) {
+    if (event.which === 13) {
+      $("#save-button").click();
+    }
+  });
   $("#load").on("click", loadSearchPattern);
   $(".modal").on("click", function (event) {
     if (event.target === this) {
       $(".modal").hide();
     }
   });
+  $("#pattern-list").on("click", ".delete-pattern", deletePattern);
 });

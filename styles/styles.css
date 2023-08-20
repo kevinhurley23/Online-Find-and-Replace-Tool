@@ -98,7 +98,8 @@ i:hover {
   color: green;
 }
 
-.delete-row {
+.delete-row,
+.delete-pattern {
   color: red;
 }
 
@@ -161,8 +162,4 @@ i:hover {
 .modal-content button {
   font-size: 1.2rem;
   padding: 10px 20px;
-}
-
-#pattern-list {
-  gap: 1rem;
 }/*# sourceMappingURL=styles.css.map */
