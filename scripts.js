@@ -132,7 +132,6 @@ $(document).ready(function () {
     $("#load-modal").show();
     if (searchPatterns.length > 0) {
       searchPatterns.forEach((pattern) => {
-        console.log(pattern);
         let item = JSON.parse(localStorage.getItem(pattern));
         let date = new Date(item.date).toLocaleString();
         let button = $(

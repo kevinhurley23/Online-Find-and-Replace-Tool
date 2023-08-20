@@ -1,24 +1,27 @@
-$gray: #e2e1e1;
-$lgray: #f1f1f1;
-$dgray: #d3d3d3;
-$lblue: #15a5f8;
-$blue: #007bff;
-$dblue: #005abb;
+$lgray: #f4f4f9;
+$gray: #6e8999;
+$dgray: #2f4550;
+$primary: #a7cced;
+$primary-hover: #76abda;
+$green: #0daf4e;
+$red: #d17c95;
 
 body {
   font-family: sans-serif;
   margin: 0;
+  background-color: $gray;
+}
+::selection {
+  background-color: $primary;
 }
 #container {
-  background-color: $gray;
-  border: 1px solid gray;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem clamp(1rem, 3vw, 5rem);
+  padding: 2rem;
   border-radius: 5px;
 }
 h1,
@@ -36,6 +39,11 @@ textarea {
   font-family: sans-serif;
   font-size: 1.1rem;
   resize: vertical;
+  background-color: $lgray;
+  outline: none;
+  &:focus-visible {
+    outline: 2px solid $dgray;
+  }
 }
 #controls {
   width: 100%;
@@ -54,45 +62,48 @@ textarea {
       min-width: 100px;
     }
   }
-  .mode {
-    flex-grow: 0.8;
-    label {
-      padding: 1rem 0;
-      font-size: 1.1rem;
-    }
+}
+.mode.row {
+  flex-grow: 0.8;
+  gap: 15px;
+  margin-right: 20px;
+  label {
+    font-size: 1.1rem;
   }
 }
 input[type="text"] {
   height: 2.5rem;
-  max-width: 100%;
+  max-width: 97%;
   font-size: 1.2rem;
   margin-right: 15px;
-  flex-grow: 1;
+  background-color: $lgray;
+  outline: none;
+}
+input[type="radio"] {
+  accent-color: $primary;
+  margin: 0;
 }
 .outer-row {
   padding: 0 10px;
   margin: 0;
-  &:nth-child(odd) {
-    background-color: $lgray;
-  }
-  &:nth-child(even) {
-    background-color: $dgray;
-  }
+  border: 2px solid $lgray;
+  background-color: $dgray;
+  color: $lgray;
 }
 i {
   font-size: 1.8rem;
-  margin: 0 15px;
+  margin: 10px 15px 10px 0;
   &:hover {
     transform: scale(1.2);
     transition: 0.4s;
   }
 }
 .add-row {
-  color: green;
+  color: $green;
 }
 .delete-row,
 .delete-pattern {
-  color: red;
+  color: $red;
 }
 
 button {
@@ -101,11 +112,10 @@ button {
   padding: 1rem;
   width: 200px;
   border: 1px solid black;
-  background-color: $lblue;
-  color: #ffffff;
+  background-color: $primary;
   transition: background-color 0.5s;
   &:hover {
-    background-color: $blue;
+    background-color: $primary-hover;
   }
 }
 
@@ -116,41 +126,11 @@ button {
   font-size: 1rem;
 }
 
-#replace-all,
-#clear-btn,
-#copy-btn {
-  background-color: $blue;
-  &:hover {
-    background-color: $dblue;
-  }
-}
-#reset {
-  background-color: #6f42c1;
-  &:hover {
-    background-color: #462b79;
-  }
-}
-#save {
-  background-color: #ffc107;
-  &:hover {
-    background-color: #b18503;
-  }
-}
-#load {
-  background-color: #ff7707;
-  &:hover {
-    background-color: #b45507;
-  }
-}
-
 #copy-btn.success {
-  background-color: green;
+  background-color: $green;
 }
 #copy-btn.failure {
-  background-color: red;
-}
-#copy-btn:not(.success):not(.failure) {
-  transition: background-color 3s;
+  background-color: $red;
 }
 
 #save-button {
@@ -175,9 +155,14 @@ button {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
+  background-color: $dgray;
+  color: $lgray;
+  border: 2px solid $lgray;
   padding: 20px;
   border-radius: 10px;
+  .row {
+    flex-wrap: nowrap;
+  }
   label {
     font-size: 1.1rem;
   }
@@ -192,4 +177,14 @@ button {
     width: auto;
     flex-grow: 1;
   }
+  i {
+    margin: 0 0 0 15px;
+  }
+}
+
+#save-modal .modal-content {
+  width: min(70%, 630px);
+}
+#load-modal .modal-content {
+  width: min(70%, 500px);
 }
