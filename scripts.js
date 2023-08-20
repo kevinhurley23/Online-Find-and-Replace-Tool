@@ -60,6 +60,38 @@ $(document).ready(function () {
     $("#rows-container").html(initialRows);
   }
 
+  $("#clear-btn").on("click", function () {
+    $("#input-text").val("");
+  });
+
+  const copyButton = $("#copy-btn");
+  const copyButtonColor = copyButton.css("background-color");
+
+  copyButton.on("click", function () {
+    let textToCopy = $("#output-text").val();
+
+    navigator.clipboard.writeText(textToCopy).then(
+      function () {
+        // To be executed if text was successfully copied to the clipboard
+        copyButton.addClass("success");
+        copyButton.text("Copied!");
+        setTimeout(function () {
+          copyButton.removeClass("success");
+          copyButton.text("Copy to Clipboard");
+        }, 2000);
+      },
+      function () {
+        // To be executed in case of error
+        copyButton.addClass("failure");
+        copyButton.text("Failed to copy");
+        setTimeout(function () {
+          copyButton.removeClass("failure");
+          copyButton.text("Copy to Clipboard");
+        }, 2000);
+      }
+    );
+  });
+
   function saveSearchPattern() {
     let rows = $("#rows-container .outer-row").map(function () {
       let findValue = $(this).find(".find").val();
@@ -100,10 +132,11 @@ $(document).ready(function () {
     $("#load-modal").show();
     if (searchPatterns.length > 0) {
       searchPatterns.forEach((pattern) => {
+        console.log(pattern);
         let item = JSON.parse(localStorage.getItem(pattern));
         let date = new Date(item.date).toLocaleString();
         let button = $(
-          `<button class="pattern-button" data=${pattern}>${pattern} (${date})</button>`
+          `<button class="pattern-button" data="${pattern}">${pattern} (${date})</button>`
         );
         button.on("click", function () {
           $("#rows-container").html("");
@@ -137,6 +170,9 @@ $(document).ready(function () {
     localStorage.removeItem(key);
     let row = $(this).closest(".row");
     row.remove();
+    if ($("#pattern-list").is(":empty")) {
+      $("#load-modal p").show();
+    }
   }
 
   $("#rows-container").on("click", ".add-row", addRow);

@@ -1,8 +1,9 @@
 $gray: #e2e1e1;
 $lgray: #f1f1f1;
 $dgray: #d3d3d3;
-$blue: rgb(130, 184, 255);
-$dblue: blue;
+$lblue: #15a5f8;
+$blue: #007bff;
+$dblue: #005abb;
 
 body {
   font-family: sans-serif;
@@ -44,7 +45,6 @@ textarea {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  flex-grow: 1;
   margin: 10px 0;
   max-width: 100%;
   p {
@@ -95,38 +95,73 @@ i {
   color: red;
 }
 
-.button-row {
-  gap: 1rem;
-  button {
-    font-size: 1.5rem;
-    margin: 1rem 0;
-    padding: 1rem;
-    width: 200px;
-  }
-  #replace-all {
-    background-color: #007bff;
-    border: 1px solid black;
-    color: #ffffff;
-  }
-  #reset {
-    background-color: #6f42c1;
-    border: 1px solid black;
-    color: #ffffff;
-  }
-  #save {
-    background-color: #ffc107;
-    border: 1px solid black;
-    color: black;
-  }
-  #load {
-    background-color: #ff7707;
-    border: 1px solid black;
-    color: #ffffff;
+button {
+  font-size: 1.5rem;
+  margin: 1rem 0;
+  padding: 1rem;
+  width: 200px;
+  border: 1px solid black;
+  background-color: $lblue;
+  color: #ffffff;
+  transition: background-color 0.5s;
+  &:hover {
+    background-color: $blue;
   }
 }
 
-#save-modal,
-#load-modal {
+#clear-btn,
+#copy-btn {
+  display: block;
+  margin: 1rem auto;
+  font-size: 1rem;
+}
+
+#replace-all,
+#clear-btn,
+#copy-btn {
+  background-color: $blue;
+  &:hover {
+    background-color: $dblue;
+  }
+}
+#reset {
+  background-color: #6f42c1;
+  &:hover {
+    background-color: #462b79;
+  }
+}
+#save {
+  background-color: #ffc107;
+  &:hover {
+    background-color: #b18503;
+  }
+}
+#load {
+  background-color: #ff7707;
+  &:hover {
+    background-color: #b45507;
+  }
+}
+
+#copy-btn.success {
+  background-color: green;
+}
+#copy-btn.failure {
+  background-color: red;
+}
+#copy-btn:not(.success):not(.failure) {
+  transition: background-color 3s;
+}
+
+#save-button {
+  width: auto;
+}
+
+.button-row {
+  gap: 1rem;
+}
+
+.modal {
   position: fixed;
   left: 0;
   top: 0;
@@ -153,5 +188,8 @@ i {
   button {
     font-size: 1.2rem;
     padding: 10px 20px;
+    margin: 0;
+    width: auto;
+    flex-grow: 1;
   }
 }
