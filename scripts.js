@@ -1,6 +1,8 @@
 $(document).ready(function () {
   const initialRows = $("#rows-container").html();
 
+  console.log(initialRows);
+
   function addRow() {
     let row = $(this).closest(".outer-row");
     let newRow = row.clone();
@@ -57,6 +59,8 @@ $(document).ready(function () {
   }
 
   function reset() {
+    $("#input-text").val("");
+    $("#output-text").val("");
     $("#rows-container").html(initialRows);
   }
 
