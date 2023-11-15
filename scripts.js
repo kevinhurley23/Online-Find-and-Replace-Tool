@@ -1,7 +1,9 @@
 $(document).ready(function () {
   const initialRows = $("#rows-container").html();
 
-  console.log(initialRows);
+  $("#input-text").on("input", function () {
+    $("#input-chars").text($("#input-text").val().length);
+  });
 
   function addRow() {
     let row = $(this).closest(".outer-row");
@@ -52,6 +54,7 @@ $(document).ready(function () {
       inputText = inputText.replace(regex, replaceText);
     });
     $("#output-text").val(inputText);
+    $("#output-chars").text($("#output-text").val().length);
   }
 
   function escapeRegExp(string) {
@@ -69,7 +72,6 @@ $(document).ready(function () {
   });
 
   const copyButton = $("#copy-btn");
-  const copyButtonColor = copyButton.css("background-color");
 
   copyButton.on("click", function () {
     let textToCopy = $("#output-text").val();
@@ -145,6 +147,7 @@ $(document).ready(function () {
           $("#rows-container").html("");
           item.rows.forEach((row, index) => {
             let newRow = $(initialRows);
+            console.log(newRow);
             newRow.find(".find").val(row.find);
             newRow.find(".replace").val(row.replace);
             newRow.find(`.mode input`).attr("name", `mode-${index + 1}`);

@@ -20,7 +20,6 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
-  border-radius: 5px;
 }
 
 h1,
@@ -29,11 +28,20 @@ h2 {
 }
 
 h2 {
-  margin-top: 0;
+  margin: 0;
 }
 
 .text-box {
   width: 100%;
+}
+@media (max-width: 550px) {
+  .text-box .row {
+    flex-direction: column;
+  }
+}
+
+.char-count {
+  font-size: 1.2rem;
 }
 
 textarea {

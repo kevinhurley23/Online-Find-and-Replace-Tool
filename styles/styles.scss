@@ -22,17 +22,24 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
-  border-radius: 5px;
 }
 h1,
 h2 {
   text-align: center;
 }
 h2 {
-  margin-top: 0;
+  margin: 0;
 }
 .text-box {
   width: 100%;
+  .row {
+    @media (max-width: 550px) {
+      flex-direction: column;
+    }
+  }
+}
+.char-count {
+  font-size: 1.2rem;
 }
 textarea {
   width: 99%;

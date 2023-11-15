@@ -17,8 +17,13 @@
     <h1>Find and Replace - Multiple Text Online</h1>
     <div id="container">
       <div id="input" class="text-box">
-        <h2>Input Text</h2>
-        <button id="clear-btn">Clear Text</button>
+        <div class="row">
+          <h2>Input Text</h2>
+          <button id="clear-btn">Clear Text</button>
+          <div class="char-count">
+            Characters: <span id="input-chars"></span>
+          </div>
+        </div>
         <textarea
           name="input-text"
           id="input-text"
@@ -27,8 +32,13 @@
         ></textarea>
       </div>
       <div id="output" class="text-box">
-        <h2>Output Text</h2>
-        <button id="copy-btn">Copy to Clipboard</button>
+        <div class="row">
+          <h2>Output Text</h2>
+          <button id="copy-btn">Copy to Clipboard</button>
+          <div class="char-count">
+            Characters: <span id="output-chars"></span>
+          </div>
+        </div>
         <textarea
           name="output-text"
           id="output-text"
